@@ -15,10 +15,13 @@
 
 - 借助Portable Basemap Server这款软件，能够把Google map和Bing map甚至是全球范围内一般精度的lidar数据导入到ArcGIS中作为底图显示，其优点是便捷，数据集全，且无需下载，随时调用。结合ArcGIS自带的Image Analysis，能在不下载数据的情况下，就实现对数据的空间分析，极大的节省了时间和存储空间。（这与下一节学习的GEE类似，不过后者更进一步将数据处理过程也交给云端完成，把本地计算机从繁重的运算中解脱了出来）如果对系统进行空间分析时的计算过程感兴趣，可以使用WhiteboxGAT软件，它不仅拥有大部分与lidar相关的空间分析功能，而且其中的代码都是可以随时查看的，名副其实的白箱子。这种大数据+云计算+开源的模式现在非常流行，具有很大的潜力。(可是由于对软件不熟悉，和ArcGIS破解不完全的原因，PBS和IA目前都无法使用，后续会继续尝试修复)[用于PBS的ArcGIS地图服务地址](http://imageryworkflows.ArcGIS.com:6080/ArcGIS/rest/services)
 
+![PBS3.1](https://github.com/Ben5455/LearningNotes_0721-master/blob/master/Image/PBS3_1.png)
 ![图像分析](https://github.com/Ben5455/LearningNotes_0721-master/blob/master/Image/imageanalysis.png)
 ## Google Earth Engine
 - Google earth engine简称GEE，是一个免费的在线地理信息获取、分析与展示平台。GEE的优点可以概括为地理数据获取容易、运算能力强大、空间分析算法灵活、实例代码齐全。数据无需下载，根据数据编码可直接调用；服务器端66000台电脑并行计算，运算能力远超单机时代；系统本身已封装了很多常用的空间分析方法，用户可以灵活调用组合，如果已有函数不满足需要，GEE支持用Javascript语言编写算法（同样支持python，但是配置python会麻烦许多）。使用GEE需要用户具备一定的编程基础，这让许多人望而却步，但是系统编写了大量的实例代码，帮助用户快速掌握系统的使用，而且一旦掌握了这项工具，对以后工作的效率会有极大的提升。
-接下来尝试以提取广东地区的植被指数为例，介绍GEE的工作过程。
+
+![图像分析](https://github.com/Ben5455/LearningNotes_0721-master/blob/master/Image/GEE.png)
+- 接下来尝试以提取广东地区的植被指数为例，介绍GEE的工作过程。
 
 
 
