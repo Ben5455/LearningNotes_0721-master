@@ -22,12 +22,29 @@
 
 ![图像分析](https://github.com/Ben5455/LearningNotes_0721-master/blob/master/Image/GEE.png)
 - 接下来尝试以提取广州市的归一化植被指数为例，介绍GEE的工作过程。
-首先在注释中给出归一化植被指数的公式
+1、在注释中给出归一化植被指数的公式
 ```javascript`
 // NormalizedDifference in Guangzhou
 // NDVI = (NIR - RED) / (NIR + RED), where
 // RED is B4, 640-670nm
 // NIR is B5, 850-888nm
+```
+2、选择landsat8的数据计算植被指数。在网上查询能够覆盖广州的landsat8数据的编号，是LC81220442017120LGN00。因此从GEE的搜索框中输入“Landsat 8”，从结果中选择原始影像“USGS Landsat 8 Raw Scenes”，获取数据集的ID号，将需要的数据导入。
+```javascript
+var img = ee.Image('LANDSAT/LC8/LC81220442017120LGN00');
+```
+3、调用函数“normalizedDifference(band1,band2)”计算归一化植被指数，其中band1和band2分别是近红外和红色波段。将结果存到图层“ndvi”中。
+```javascript
+var ndvi = img.normalizedDifference(['B5', 'B4']);
+```
+4、最后设定图层显示的色调，将地图的中心定位到广州，并将图层“ndvi”添加到地图中。
+```javascript
+var palette = ['FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718',
+               '74A901', '66A000', '529400', '3E8601', '207401', '056201',
+               '004C00', '023B01', '012E01', '011D01', '011301'];
+
+Map.setCenter(113.2644, 23.1291, 8);
+Map.addLayer(ndvi, {min: 0, max: 1, palette: palette}, 'NDVI');
 ```
 
 ## git
