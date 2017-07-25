@@ -23,12 +23,13 @@
 ![图像分析](https://github.com/Ben5455/LearningNotes_0721-master/blob/master/Image/GEE.png)
 - 接下来尝试以提取广州市的归一化植被指数为例，介绍GEE的工作过程。
 1、在注释中给出归一化植被指数的公式
-```javascript`
+```javascript
 // NormalizedDifference in Guangzhou
 // NDVI = (NIR - RED) / (NIR + RED), where
 // RED is B4, 640-670nm
 // NIR is B5, 850-888nm
 ```
+
 2、选择landsat8的数据计算植被指数。在网上查询能够覆盖广州的landsat8数据的编号，是LC81220442017120LGN00。因此从GEE的搜索框中输入“Landsat 8”，从结果中选择原始影像“USGS Landsat 8 Raw Scenes”，获取数据集的ID号，将需要的数据导入。
 ```javascript
 var img = ee.Image('LANDSAT/LC8/LC81220442017120LGN00');
