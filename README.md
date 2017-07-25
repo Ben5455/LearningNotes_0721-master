@@ -22,7 +22,7 @@
 
 ![图像分析](https://github.com/Ben5455/LearningNotes_0721-master/blob/master/Image/GEE.png)
 - 接下来尝试以提取广州市的归一化植被指数为例，介绍GEE的工作过程。
-1、在注释中给出归一化植被指数的公式
+1.在注释中给出归一化植被指数的公式
 ```javascript
 // NormalizedDifference in Guangzhou
 // NDVI = (NIR - RED) / (NIR + RED), where
@@ -30,15 +30,15 @@
 // NIR is B5, 850-888nm
 ```
 
-2、选择landsat8的数据计算植被指数。在网上查询能够覆盖广州的landsat8数据的编号，是LC81220442017120LGN00。因此从GEE的搜索框中输入“Landsat 8”，从结果中选择原始影像“USGS Landsat 8 Raw Scenes”，获取数据集的ID号，将需要的数据导入。
+2.选择landsat8的数据计算植被指数。在网上查询能够覆盖广州的landsat8数据的编号，是LC81220442017120LGN00。因此从GEE的搜索框中输入“Landsat 8”，从结果中选择原始影像“USGS Landsat 8 Raw Scenes”，获取数据集的ID号，将需要的数据导入。
 ```javascript
 var img = ee.Image('LANDSAT/LC8/LC81220442017120LGN00');
 ```
-3、调用函数“normalizedDifference(band1,band2)”计算归一化植被指数，其中band1和band2分别是近红外和红色波段。将结果存到图层“ndvi”中。
+3.调用函数“normalizedDifference(band1,band2)”计算归一化植被指数，其中band1和band2分别是近红外和红色波段。将结果存到图层“ndvi”中。
 ```javascript
 var ndvi = img.normalizedDifference(['B5', 'B4']);
 ```
-4、最后设定图层显示的色调，将地图的中心定位到广州，并将图层“ndvi”添加到地图中。
+4.最后设定图层显示的色调，将地图的中心定位到广州，并将图层“ndvi”添加到地图中。
 ```javascript
 var palette = ['FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718',
                '74A901', '66A000', '529400', '3E8601', '207401', '056201',
@@ -47,6 +47,13 @@ var palette = ['FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718',
 Map.setCenter(113.2644, 23.1291, 8);
 Map.addLayer(ndvi, {min: 0, max: 1, palette: palette}, 'NDVI');
 ```
+
+完整代码的运行结果如下图所示
+
+
+
+- 此外，GEE还支持自行上传数据，同样能够用于空间分析。譬如此处由于GEE自带的矢量数据较少，可以上传广州行政边界矢量数据，裁剪结果图只保留广州的区域。当一个算法在小区域内得到验证，随时可以更改数据源，将算法用于大区域的分析。
+- 如果在GEE注册了账户，可以通过! [这个链接](https://code.earthengine.google.com/9615c762011c457e26d23f26c2e07bff)访问我的原始代码，并对它们作出修改。
 
 ## git
 - Git实质是一个版本控制工具，适合用来追踪小型的，文本类型的，但具有多个版本的文件的编写过程。当用户用Git对一个文件夹进行管理时，Git会记录文件夹内所有变化，包括文件的增删、修改。用户可以随时设定文件夹当前状态为还原点，日后如果有需要，就能通过Git恢复到当前状态。
